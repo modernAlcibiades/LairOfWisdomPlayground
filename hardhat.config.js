@@ -33,7 +33,7 @@ module.exports = {
       chainId: 250,
       url: "https://rpc.ftm.tools/",
       accounts: [process.env.PRIVATE_KEY],
-      gasPrice: 130000000000
+      maxFeePerGas: 190000000000
     },
   },
   "evmVersion": "berlin",
