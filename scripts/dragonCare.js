@@ -13,7 +13,7 @@ function sleep(ms) {
 async function main() {
     // Control parameters
     const TRUST_LIMIT = 1000;
-    const SLEEPMS = 50000;
+    const SLEEPMS = 3600000;
     let min_trust = TRUST_LIMIT - 1;
     let step = 0;
 
