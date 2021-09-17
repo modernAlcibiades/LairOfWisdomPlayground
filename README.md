@@ -1,13 +1,55 @@
-About
-Project to interaction with Lair of Wisdom contracts
+# Dragon Priest
+Project provides javascript scripts to take care of Dragons while earning their trust. Checkout `scripts/dragonCare.js` for
+the code. This way you can earn trust on your wallet.
 
-Plan
-- Push tributes in a loop until dragon is born
-- Breed dragon and name it kvothe, cthae, Anomander Rake
+The script gets all the existing dragons, and proceeds to feed, play, clean, and sleep all the Dragons, one by one. In addition, there are heuristics to heal, upgrade and breed.
+## How To Use
+To setup the project, open the terminal and do the following
+```
+git clone https://github.com/modernAlcibiades/LairOfWisdomPlayground.git
+cd LairOfWisdomPlayground
+touch .env
+```
 
-Done
-- js script to earn trust of all Dragons
+The .env file contains your local scripts, edit it to include the following structure. 
+NOTE - DO NOT share the .env file for your own safety.
+```
+RPC_URL=https://rpc.ftm.tools/
+PRIVATE_KEY=<your private key>
+ADDRESS=<account address>
+```
 
-Note
+You will need to have npm installed.
+To run caretaker job that takes care of all dragons, do the following
+```
+cd LairOfWisdomPlayground
+npx hardhat run scripts/dragonCare.js --network fantom
+```
+
+Running the caretaker once every few hours is more than enough. Once a day would also be fine. Dragons are strong!
+You can also set the preferred name for your dragon in the file.
+
+
+## About
+This is a hobby project interacts with contracts that are part of the Lair of Wisdom.
+Lair Address `0x83633dca596e741c80f4fa032c75518cc251b09b`
+
+## Goals
+- Basic caretaker job to maintain the dragons
+- Regular tributes to eggs
+
+## Note
 - Dragons with boredom >80, hunger>80 cannot be fed or played with. There is no
   way to reduce the hunger and boredom values at that point.
+- Do not worry if you see occasional error message due to Underpriced transactions. It shouldn't affect the overall functioning.
+- Sleep timer added to allow for correct nonce. May need to be changed depending on network conditions.
+
+## TO DO
+- Proxy smart contract to replace the script while ensuring caller earns the trust.
+- Improve heuristics for the advanced scripts.
+- Add configurable parameters to a dummy .env file for reference.
+
+If you wish to support the project, add issues on Github, or fork the project.
+If you wish to support me, send some love to `0x252DD902190Be0b9aCac625996fDa7137A4b684c`
+
+Peace!!
