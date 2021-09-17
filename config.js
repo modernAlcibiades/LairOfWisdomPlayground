@@ -1,0 +1,10 @@
+module.exports = {
+  CHOOSE_DRAGONS: 'all',
+  // CHOOSE_DRAGONS: [
+  //   '0x6b121793d1cB8936BAC7135e8532BfBf3e694166',
+  //   '0xF10E6c070DEa8af8Cc5dd19bAAB732D9Ab4Ba869'
+  // ],
+  RUN_BASIC: true,
+  RUN_ADVANCED: true,
+  SLEEPMS: 1000
+}

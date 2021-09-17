@@ -5,6 +5,7 @@
 // Runtime Environment's members available in the global scope.
 const { network } = require("hardhat");
 const hre = require("hardhat");
+const local_config = require('../config.js');
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -25,9 +26,14 @@ async function main() {
     const Lair = await ethers.getContractFactory("Lair");
     const lair = await Lair.attach("0x83633dca596e741c80f4fa032c75518cc251b09b");
 
-    // Get list of all dragons and attach contract
-    const dragons_list = await lair.allDragons();
     const Dragon = await ethers.getContractFactory("Dragon");
+    let dragons_list;
+    dragons_list = await lair.allDragons();
+    console.log(local_config);
+    if (local_config.CHOOSE_DRAGONS && Array.isArray(local_config.CHOOSE_DRAGONS)) {
+        dragons_list = dragons_list.filter(value => local_config.CHOOSE_DRAGONS.includes(value));
+    }
+    console.log("Valid Dragon addresses : ", dragons_list);
 
     let dragons = [];
     for (let i = 0; i < dragons_list.length; i++) {
@@ -201,11 +207,20 @@ async function main() {
     }
     let balance = ethers.utils.formatEther(await deployer.getBalance());
     if (min_trust < TRUST_LIMIT) {
-        await run();
-        min_trust = await runAdvanced();
-        console.log("Lowest trust with dragon : ", min_trust);
-        balance = ethers.utils.formatEther(await deployer.getBalance());
-        console.log("Caller", deployer.address, "Balance in FTM", balance);
+        if (local_config.RUN_BASIC) {
+            await run();
+        }
+        if (local_config.RUN_ADVANCED) {
+            min_trust = await runAdvanced();
+            console.log("Lowest trust with dragon : ", min_trust);
+        }
+
+        if (local_config.RUN_BASIC || local_config.RUN_ADVANCED) {
+            balance = ethers.utils.formatEther(await deployer.getBalance());
+            console.log("Caller", deployer.address, "Balance in FTM", balance);
+        } else {
+            console.log('Doing Nothing!! Set RUN_BASIC=true or RUN_ADVANCED=true in config.js');
+        }
     }
 
 }
