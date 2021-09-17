@@ -29,6 +29,20 @@ npx hardhat run scripts/dragonCare.js --network fantom
 Running the caretaker once every few hours is more than enough. Once a day would also be fine. Dragons are strong!
 You can also set the preferred name for your dragon in the file.
 
+## Configuration
+Edit `config.js` file to control the parts of the code that get run
+- To take care of all the dragons, set `CHOOSE_DRAGONS=all`
+- If you want to select particular dragons, add their contract address to the array. 
+  For example, to choose Leshner and Pleasr, set
+  ```js
+   CHOOSE_DRAGONS: [
+     '0x6b121793d1cB8936BAC7135e8532BfBf3e694166',
+     '0xF10E6c070DEa8af8Cc5dd19bAAB732D9Ab4Ba869'
+   ],
+  ```
+- Set `RUN_BASIC=true` if you want to call tasks that earn trust : `play, sleep, feed, clean`
+- Set `RUN_ADVANCED=true` if you want to call tasks that use trust : `heal, upgrade, breed`
+
 
 ## About
 This is a hobby project interacts with contracts that are part of the Lair of Wisdom.
